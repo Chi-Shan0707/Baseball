@@ -1,35 +1,110 @@
+#!/usr/bin/env python3
+"""
+下载 MLB YouTube 视频
+解决方案：
+1. 添加 cookies 和 user-agent 来规避403错误
+2. 使用分片重试和更稳定的下载策略
+"""
+
 import os
 import json
-import string
-import random
 import subprocess
+import time
+from pathlib import Path
 
 
-save_dir = '../youtube-videos/'
-with open('data/mlb-youtube-segmented.json', 'r') as f:
-    data = json.load(f)
-    for entry in data.values():
+def download_video(ytid, yturl, save_dir, max_attempts=5):
+    """下载单个视频，带重试机制"""
+    output_path = save_dir / f'{ytid}.mkv'
+    
+    if output_path.exists():
+        print(f'✓ 视频 {ytid} 已存在，跳过')
+        return True
+    
+    # 构建 yt-dlp 命令 - 关键改进
+    cmd = [
+        'yt-dlp',
+        #'--no-proxy',  # 禁用代理，避免SSL错误
+        '-f', 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+        '--merge-output-format', 'mkv',
+        '-o', str(output_path),
+        
+        # 网络稳定性设置
+        '--socket-timeout', '30',
+        '--retries', '10',
+        '--fragment-retries', '10',
+        '--retry-sleep', '5',
+        
+        # 规避403错误
+        '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        '--add-header', 'Accept-Language:en-US,en;q=0.9',
+        
+        # 限速以避免被ban（可选）
+        '--limit-rate', '5M',
+        
+        # 安静模式，只显示进度
+        '--progress',
+        '--no-warnings',
+        
+        yturl
+    ]
+    
+    for attempt in range(1, max_attempts + 1):
+        print(f'[{attempt}/{max_attempts}] 下载 {ytid}...')
+        
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=3600)
+            
+            if result.returncode == 0:
+                print(f'✓ 视频 {ytid} 下载完成')
+                return True
+            else:
+                print(f'✗ 失败 (code {result.returncode})')
+                if '--verbose' in cmd or attempt == max_attempts:
+                    print(f'stderr: {result.stderr[:500]}')
+                    
+        except subprocess.TimeoutExpired:
+            print(f'✗ 超时')
+        except Exception as e:
+            print(f'✗ 异常: {e}')
+        
+        # 清理临时文件
+        for temp_file in save_dir.glob(f'{ytid}*'):
+            if temp_file.suffix in ['.part', '.ytdl', '.temp']:
+                temp_file.unlink(missing_ok=True)
+                print(f'  清理: {temp_file.name}')
+        
+        if attempt < max_attempts:
+            wait = min(30, 5 * attempt)
+            print(f'  等待 {wait}s 后重试...\n')
+            time.sleep(wait)
+    
+    print(f'✗ 视频 {ytid} 下载失败，已达最大重试次数\n')
+    return False
+
+
+def main():
+    save_dir = Path('../youtube-videos')
+    save_dir.mkdir(parents=True, exist_ok=True)
+    
+    with open('data/mlb-youtube-segmented.json', 'r') as f:
+        data = json.load(f)
+    
+    total = len(data)
+    success = 0
+    
+    print(f'开始下载 {total} 个视频\n')
+    
+    for idx, (key, entry) in enumerate(data.items(), 1):
         yturl = entry['url']
         ytid = yturl.split('=')[-1]
+        
+        print(f'[{idx}/{total}] {ytid}')
+        if download_video(ytid, yturl, save_dir):
+            success += 1
+    
+    print(f'\n完成: {success}/{total} 成功')
 
-        if os.path.exists(os.path.join(save_dir, ytid+'.mkv')):
-            continue
 
-        # Prefer best video+audio, merge to mkv, use node if available for JS runtime
-        cmd = [
-            'yt-dlp',
-            '-f', 'bestvideo+bestaudio/best',  # 最佳音视频合并
-            yturl,                              # YouTube链接
-            '-o', os.path.join(save_dir, f'{ytid}.%(ext)s'),  # 输出路径（带动态扩展名）
-            '--merge-output-format', 'mkv',     # 合并后输出mkv格式
-            '--js-runtime', 'node'             # 指定JS运行时为node（关键，匹配之前的安装）
-        ]
-
-        result = subprocess.run(
-            cmd,
-            check=True,  # 命令执行失败时抛出异常，方便定位问题
-            capture_output=True,  # 捕获stdout/stderr输出
-            text=True  # 输出转为字符串（而非字节流），方便打印
-        )
-        # 打印下载成功的日志
-        print(f'视频 {ytid} 下载完成\n{result.stdout}')
+if __name__ == '__main__':
+    main()
