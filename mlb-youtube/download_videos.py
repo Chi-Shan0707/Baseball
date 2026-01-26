@@ -21,30 +21,31 @@ def download_video(ytid, yturl, save_dir, max_attempts=5):
         print(f'✓ 视频 {ytid} 已存在，跳过')
         return True
     
-    # 构建 yt-dlp 命令 - 关键改进
+    # 构建 yt-dlp 命令 - 只下载视频（无音频），速度更快
     cmd = [
         'yt-dlp',
-        #'--no-proxy',  # 禁用代理，避免SSL错误
-        '-f', 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
-        '--merge-output-format', 'mkv',
+        # 使用代理（VPN）连接YouTube
+        '--proxy', 'http://127.0.0.1:7897',  # 显式指定代理
+        '--no-check-certificate',  # 跳过SSL证书验证（代理可能导致证书问题）
+        '-f', 'bestvideo[ext=mp4]/bestvideo/best',  # 只下载视频，不要音频
         '-o', str(output_path),
         
         # 网络稳定性设置
         '--socket-timeout', '30',
+    
         '--retries', '10',
         '--fragment-retries', '10',
+        '--concurrent-fragments', '4',
         '--retry-sleep', '5',
         
         # 规避403错误
         '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
         '--add-header', 'Accept-Language:en-US,en;q=0.9',
         
-        # 限速以避免被ban（可选）
-        '--limit-rate', '5M',
-        
         # 安静模式，只显示进度
         '--progress',
         '--no-warnings',
+        
         
         yturl
     ]
