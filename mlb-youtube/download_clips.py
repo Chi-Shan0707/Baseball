@@ -24,7 +24,7 @@ def get_pitch_label(info):
     else :
         return None 
 
-def download_clip(save_idx, url, start_time, end_time, save_dir, max_attempts=3):
+def download_clip(save_idx,clip_id, url, start_time, end_time, save_dir, max_attempts=3):
     """下载单个视频片段"""
     ## 从 URL 提取视频 ID
     ##video_id = url.split('=')[-1]
@@ -36,6 +36,9 @@ def download_clip(save_idx, url, start_time, end_time, save_dir, max_attempts=3)
         print(f'✓ 片段 {save_idx} 已存在，跳过')
         return True
     
+
+   
+
     # 计算片段时长
     duration = end_time - start_time
     
@@ -107,11 +110,11 @@ def download_clip(save_idx, url, start_time, end_time, save_dir, max_attempts=3)
     return False
 
 def append_csv(id,clip_id,label,csv_path):
-    file_exists = csv_path.exists()
+    # file_exists = csv_path.exists()
     with open(csv_path, 'a', newline='') as f:
         w = csv.writer(f)
-        if not file_exists:
-            w.writerow(['id','clip_id', 'label'])
+        # if not file_exists:
+        #     w.writerow(['id','clip_id', 'label'])
         w.writerow([id,clip_id, label])
 
 def main():
@@ -136,11 +139,24 @@ def main():
     print('=' * 60)
     
 
-    save_idx = 0
+    
 
     csv_path= Path('../dataset/pitchcalls/labels.csv')
     
+    if csv_path.exists():
+        save_idx = 0
+        with open(csv_path, newline='') as f:
+            for row in csv.DictReader(f): #遍历的是数据行，不访问head
+                save_idx += 1
+
+    else :
+        with open(csv_path, 'w', newline='') as f:
+            w = csv.writer(f)
+            w.writerow(['id','clip_id', 'label'])
+        save_idx = 0
     
+    print(f'从 {csv_path} 继续编号，起始 ID: {save_idx}\n')
+
     for idx, (clip_id, info) in enumerate(clips, 1):
         
         label = get_pitch_label(info)
@@ -152,13 +168,26 @@ def main():
         start = info['start']
         end = info['end']
         
+        if start >= end or start < 0 or end < 0 :
+            continue
+        
         print(f'\n[{idx}/{total}] Clip ID: {clip_id}')
         print(f'  URL: {url}')
         print(f'  时间: {start:.2f}s - {end:.2f}s')
         
-        if download_clip(save_idx, url, start, end, save_dir):
+        if csv_path.exists():
+            """
+    说明：open(..., newline=...) 是什么？ 💡
+作用：控制 Python 在读写时如何处理行结束符（换行符），例如 \n、\r\n 等。
+和 csv 模块的关系：使用 csv 时推荐传 newline=''，因为 csv 模块自己负责写入正确的行结束符；如果不这么做（例如默认 None），在 Windows 上写 CSV 可能会出现额外空行。
+                """
+            with open(csv_path, newline='') as f:
+                if any(row.get('clip_id') == clip_id for row in csv.DictReader(f)):
+                    print(f'✓ 片段 {clip_id} 已存在，跳过')
+                    continue
+
+        if download_clip(save_idx, clip_id, url, start, end, save_dir):
             success += 1
-            
             append_csv(save_idx,clip_id,label,csv_path)
             save_idx += 1
         else:
