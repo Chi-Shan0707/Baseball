@@ -5,21 +5,35 @@
 """
 
 import os
+import csv
 import json
 import subprocess
 from pathlib import Path
 
 
-def download_clip(clip_id, url, start_time, end_time, save_dir, max_attempts=3):
+
+def get_pitch_label(info):
+#JSON 文件里每个片段有 labels 字段（列表），常见值有 ["strike"] 或 ["ball"]。
+    """获取投球标签"""
+    labels = info.get('labels', [])
+    # labels_lc = [label.lower() for label in labels] 本就全小写
+    if 'strike' in labels:
+        return 'strike'
+    elif 'ball' in labels:
+        return 'ball'
+    else :
+        return None 
+
+def download_clip(save_idx, url, start_time, end_time, save_dir, max_attempts=3):
     """下载单个视频片段"""
-    # 从 URL 提取视频 ID
-    video_id = url.split('=')[-1]
+    ## 从 URL 提取视频 ID
+    ##video_id = url.split('=')[-1]
     
-    # 输出文件名：clip_id_video_id.mp4
-    output_path = save_dir / f'{clip_id}_{video_id}.mp4'
+    # 输出文件名：clip_id.mp4
+    output_path = save_dir / f'{save_idx}.mp4'
     
     if output_path.exists():
-        print(f'✓ 片段 {clip_id} 已存在，跳过')
+        print(f'✓ 片段 {save_idx} 已存在，跳过')
         return True
     
     # 计算片段时长
@@ -60,13 +74,13 @@ def download_clip(clip_id, url, start_time, end_time, save_dir, max_attempts=3):
     ]
     
     for attempt in range(1, max_attempts + 1):
-        print(f'[{attempt}/{max_attempts}] 下载片段 {clip_id} ({duration:.1f}s)...')
+        print(f'[{attempt}/{max_attempts}] 下载片段 {save_idx} ({duration:.1f}s)...')
         
         try:
             result = subprocess.run(cmd, capture_output=True, text=True, timeout=600)
             
             if result.returncode == 0 and output_path.exists():
-                print(f'✓ 片段 {clip_id} 下载完成')
+                print(f'✓ 片段 {save_idx} 下载完成')
                 return True
             else:
                 print(f'✗ 失败 (code {result.returncode})')
@@ -79,7 +93,7 @@ def download_clip(clip_id, url, start_time, end_time, save_dir, max_attempts=3):
             print(f'✗ 异常: {e}')
         
         # 清理临时文件
-        for temp_file in save_dir.glob(f'{clip_id}*'):
+        for temp_file in save_dir.glob(f'{save_idx}*'):
             if temp_file.suffix in ['.part', '.ytdl', '.temp']:
                 temp_file.unlink(missing_ok=True)
                 print(f'  清理: {temp_file.name}')
@@ -89,13 +103,20 @@ def download_clip(clip_id, url, start_time, end_time, save_dir, max_attempts=3):
             import time
             time.sleep(5)
     
-    print(f'✗ 片段 {clip_id} 下载失败\n')
+    print(f'✗ 片段 {save_idx} 下载失败\n')
     return False
 
+def append_csv(id,clip_id,label,csv_path):
+    file_exists = csv_path.exists()
+    with open(csv_path, 'a', newline='') as f:
+        w = csv.writer(f)
+        if not file_exists:
+            w.writerow(['id','clip_id', 'label'])
+        w.writerow([id,clip_id, label])
 
 def main():
     # 设置路径
-    save_dir = Path('../youtube-videos')
+    save_dir = Path('../dataset/videos')
     save_dir.mkdir(parents=True, exist_ok=True)
     
     # 读取 JSON 数据
@@ -114,7 +135,19 @@ def main():
     print(f'开始下载 {total} 个视频片段\n')
     print('=' * 60)
     
+
+    save_idx = 0
+
+    csv_path= Path('../dataset/pitchcalls/labels.csv')
+    
+    
     for idx, (clip_id, info) in enumerate(clips, 1):
+        
+        label = get_pitch_label(info)
+        if label is None:
+            print(f'跳过片段 {clip_id}，无有效标签')
+            continue
+
         url = info['url']
         start = info['start']
         end = info['end']
@@ -123,8 +156,11 @@ def main():
         print(f'  URL: {url}')
         print(f'  时间: {start:.2f}s - {end:.2f}s')
         
-        if download_clip(clip_id, url, start, end, save_dir):
+        if download_clip(save_idx, url, start, end, save_dir):
             success += 1
+            
+            append_csv(save_idx,clip_id,label,csv_path)
+            save_idx += 1
         else:
             failed.append(clip_id)
         
