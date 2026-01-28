@@ -1,0 +1,728 @@
+{
+  "summary": {
+    "total_videos": 983,
+    "healthy": 906,
+    "damaged": 77,
+    "damage_rate": 0.07833163784333673
+  },
+  "damaged_videos": [
+    {
+      "filename": "884.mp4",
+      "errors": [
+        "[h264 @ 0x5a92f1992c80] mmco: unref short failure",
+        ""
+      ]
+    },
+    {
+      "filename": "470.mp4",
+      "errors": [
+        "[null @ 0x65229ef5b0c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 23 >= 0",
+        "[null @ 0x65229ef5b0c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 23 >= 1",
+        "[null @ 0x65229ef5b0c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 23 >= 2",
+        "[null @ 0x65229ef5b0c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 23 >= 3",
+        "[null @ 0x65229ef5b0c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 23 >= 4"
+      ]
+    },
+    {
+      "filename": "7.mp4",
+      "errors": [
+        "[aac @ 0x61f7a53cef40] TYPE_FIL: Input buffer exhausted before END element found",
+        "[aac @ 0x61f7a5427640] TYPE_FIL: Input buffer exhausted before END element found",
+        "[aist#0:1/aac @ 0x61f7a54dec80] Error submitting packet to decoder: Invalid data found when processing input",
+        "[aist#0:1/aac @ 0x61f7a54dec80] Decode error rate 1 exceeds maximum 0.666667",
+        ""
+      ]
+    },
+    {
+      "filename": "491.mp4",
+      "errors": [
+        "[null @ 0x610090366c00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 62 >= 0",
+        "[null @ 0x610090366c00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 62 >= 1",
+        "[null @ 0x610090366c00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 62 >= 2",
+        "[null @ 0x610090366c00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 62 >= 3",
+        "[null @ 0x610090366c00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 62 >= 4"
+      ]
+    },
+    {
+      "filename": "474.mp4",
+      "errors": [
+        "[h264 @ 0x65065fe0c840] mmco: unref short failure",
+        "    Last message repeated 1 times",
+        ""
+      ]
+    },
+    {
+      "filename": "737.mp4",
+      "errors": [
+        "[null @ 0x594b550c36c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 28 >= 0",
+        "[null @ 0x594b550c36c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 28 >= 1",
+        "[null @ 0x594b550c36c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 28 >= 2",
+        "[null @ 0x594b550c36c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 28 >= 3",
+        "[null @ 0x594b550c36c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 28 >= 4"
+      ]
+    },
+    {
+      "filename": "176.mp4",
+      "errors": [
+        "[null @ 0x58780c706240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 130 >= 0",
+        "[null @ 0x58780c706240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 130 >= 1",
+        "[null @ 0x58780c706240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 130 >= 2",
+        "[null @ 0x58780c706240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 130 >= 3",
+        "[null @ 0x58780c706240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 130 >= 4"
+      ]
+    },
+    {
+      "filename": "196.mp4",
+      "errors": [
+        "[h264 @ 0x5f6bcefaadc0] mmco: unref short failure",
+        ""
+      ]
+    },
+    {
+      "filename": "908.mp4",
+      "errors": [
+        "[null @ 0x5b6bd3e4fd80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 6 >= 0",
+        "[null @ 0x5b6bd3e4fd80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 6 >= 1",
+        "[null @ 0x5b6bd3e4fd80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 6 >= 2",
+        "[null @ 0x5b6bd3e4fd80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 6 >= 3",
+        "[null @ 0x5b6bd3e4fd80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 6 >= 4"
+      ]
+    },
+    {
+      "filename": "244.mp4",
+      "errors": [
+        "[null @ 0x5d0fdb346380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 45 >= 0",
+        "[null @ 0x5d0fdb346380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 45 >= 1",
+        "[null @ 0x5d0fdb346380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 45 >= 2",
+        "[null @ 0x5d0fdb346380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 45 >= 3",
+        "[null @ 0x5d0fdb346380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 45 >= 4"
+      ]
+    },
+    {
+      "filename": "13.mp4",
+      "errors": [
+        "[NULL @ 0x5b4bdeabe480] Invalid NAL unit size (12058 > 2951).",
+        "[NULL @ 0x5b4bdeabe480] missing picture in access unit with size 2955",
+        "[h264 @ 0x5b4bdf5a3340] Invalid NAL unit size (12058 > 2951).",
+        "[h264 @ 0x5b4bdf5a3340] Error splitting the input into NAL units.",
+        "[vist#0:0/h264 @ 0x5b4bdeac58c0] Decoding error: Invalid data found when processing input"
+      ]
+    },
+    {
+      "filename": "137.mp4",
+      "errors": [
+        "[h264 @ 0x5d71c86bbac0] mmco: unref short failure",
+        "    Last message repeated 1 times",
+        ""
+      ]
+    },
+    {
+      "filename": "179.mp4",
+      "errors": [
+        "[null @ 0x5693a9f766c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 272 >= 0",
+        "[null @ 0x5693a9f766c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 272 >= 1",
+        "[null @ 0x5693a9f766c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 272 >= 2",
+        "[null @ 0x5693a9f766c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 272 >= 3",
+        "[null @ 0x5693a9f766c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 272 >= 4"
+      ]
+    },
+    {
+      "filename": "412.mp4",
+      "errors": [
+        "[h264 @ 0x5a258da79ac0] mmco: unref short failure",
+        ""
+      ]
+    },
+    {
+      "filename": "834.mp4",
+      "errors": [
+        "[NULL @ 0x60dc495f73c0] Invalid NAL unit size (196397 > 103173).",
+        "[NULL @ 0x60dc495f73c0] missing picture in access unit with size 103222",
+        "[h264 @ 0x60dc496a0b00] Invalid NAL unit size (196397 > 103173).",
+        "[h264 @ 0x60dc496a0b00] Error splitting the input into NAL units.",
+        "[vist#0:0/h264 @ 0x60dc496aee40] Decoding error: Invalid data found when processing input"
+      ]
+    },
+    {
+      "filename": "57.mp4",
+      "errors": [
+        "[aac @ 0x587958557ec0] decode_band_types: Input buffer exhausted before END element found",
+        "[aist#0:1/aac @ 0x5879584ff100] Error submitting packet to decoder: Invalid data found when processing input",
+        "[NULL @ 0x5879584a5480] Invalid NAL unit size (29933 > 21928).",
+        "[NULL @ 0x5879584a5480] missing picture in access unit with size 21932",
+        "[h264 @ 0x58795920f780] Invalid NAL unit size (29933 > 21928)."
+      ]
+    },
+    {
+      "filename": "161.mp4",
+      "errors": [
+        "[h264 @ 0x5bebc4e80440] mmco: unref short failure",
+        "    Last message repeated 1 times",
+        ""
+      ]
+    },
+    {
+      "filename": "849.mp4",
+      "errors": [
+        "[h264 @ 0x642808022500] mmco: unref short failure",
+        ""
+      ]
+    },
+    {
+      "filename": "748.mp4",
+      "errors": [
+        "[null @ 0x5f4ebfcee080] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 78 >= 0",
+        "[null @ 0x5f4ebfcee080] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 78 >= 1",
+        "[null @ 0x5f4ebfcee080] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 78 >= 2",
+        "[null @ 0x5f4ebfcee080] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 78 >= 3",
+        "[null @ 0x5f4ebfcee080] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 78 >= 4"
+      ]
+    },
+    {
+      "filename": "915.mp4",
+      "errors": [
+        "[null @ 0x5e6d31cf63c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 229 >= 0",
+        "[null @ 0x5e6d31cf63c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 229 >= 1",
+        "[null @ 0x5e6d31cf63c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 229 >= 2",
+        "[null @ 0x5e6d31cf63c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 229 >= 3",
+        "[null @ 0x5e6d31cf63c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 229 >= 4"
+      ]
+    },
+    {
+      "filename": "118.mp4",
+      "errors": [
+        "[null @ 0x563755d61240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 93 >= 0",
+        "[null @ 0x563755d61240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 93 >= 1",
+        "[null @ 0x563755d61240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 93 >= 2",
+        "[null @ 0x563755d61240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 93 >= 3",
+        "[null @ 0x563755d61240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 93 >= 4"
+      ]
+    },
+    {
+      "filename": "110.mp4",
+      "errors": [
+        "[null @ 0x5d3299e0b040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 41 >= 0",
+        "[null @ 0x5d3299e0b040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 41 >= 1",
+        "[null @ 0x5d3299e0b040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 41 >= 2",
+        "[null @ 0x5d3299e0b040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 41 >= 3",
+        "[null @ 0x5d3299e0b040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 41 >= 4"
+      ]
+    },
+    {
+      "filename": "438.mp4",
+      "errors": [
+        "[null @ 0x57990093af40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 41 >= 0",
+        "[null @ 0x57990093af40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 41 >= 1",
+        "[null @ 0x57990093af40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 41 >= 2",
+        "[null @ 0x57990093af40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 41 >= 3",
+        "[null @ 0x57990093af40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 41 >= 4"
+      ]
+    },
+    {
+      "filename": "185.mp4",
+      "errors": [
+        "[null @ 0x57dc3e509f80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 301 >= 0",
+        "[null @ 0x57dc3e509f80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 301 >= 1",
+        "[null @ 0x57dc3e509f80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 301 >= 2",
+        "[null @ 0x57dc3e509f80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 301 >= 3",
+        "[null @ 0x57dc3e509f80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 301 >= 4"
+      ]
+    },
+    {
+      "filename": "588.mp4",
+      "errors": [
+        "[null @ 0x5b1d6fae4f80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 55 >= 0",
+        "[null @ 0x5b1d6fae4f80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 55 >= 1",
+        "[null @ 0x5b1d6fae4f80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 55 >= 2",
+        "[null @ 0x5b1d6fae4f80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 55 >= 3",
+        "[null @ 0x5b1d6fae4f80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 55 >= 4"
+      ]
+    },
+    {
+      "filename": "500.mp4",
+      "errors": [
+        "[null @ 0x5b3b782c5740] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 164 >= 0",
+        "[null @ 0x5b3b782c5740] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 164 >= 1",
+        "[null @ 0x5b3b782c5740] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 164 >= 2",
+        "[null @ 0x5b3b782c5740] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 164 >= 3",
+        "[null @ 0x5b3b782c5740] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 164 >= 4"
+      ]
+    },
+    {
+      "filename": "757.mp4",
+      "errors": [
+        "[null @ 0x64bf246f6380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 72 >= 0",
+        "[null @ 0x64bf246f6380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 72 >= 1",
+        "[null @ 0x64bf246f6380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 72 >= 2",
+        "[null @ 0x64bf246f6380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 72 >= 3",
+        "[null @ 0x64bf246f6380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 72 >= 4"
+      ]
+    },
+    {
+      "filename": "658.mp4",
+      "errors": [
+        "[null @ 0x56ddd8846b80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 244 >= 0",
+        "[null @ 0x56ddd8846b80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 244 >= 1",
+        "[null @ 0x56ddd8846b80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 244 >= 2",
+        "[null @ 0x56ddd8846b80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 244 >= 3",
+        "[null @ 0x56ddd8846b80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 244 >= 4"
+      ]
+    },
+    {
+      "filename": "586.mp4",
+      "errors": [
+        "[null @ 0x5daa07968740] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 62 >= 0",
+        "[null @ 0x5daa07968740] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 62 >= 1",
+        "[null @ 0x5daa07968740] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 62 >= 2",
+        "[null @ 0x5daa07968740] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 62 >= 3",
+        "[null @ 0x5daa07968740] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 62 >= 4"
+      ]
+    },
+    {
+      "filename": "763.mp4",
+      "errors": [
+        "[h264 @ 0x5605c9b60cc0] mmco: unref short failure",
+        ""
+      ]
+    },
+    {
+      "filename": "290.mp4",
+      "errors": [
+        "[h264 @ 0x5c2b600156c0] mmco: unref short failure",
+        ""
+      ]
+    },
+    {
+      "filename": "19.mp4",
+      "errors": [
+        "[h264 @ 0x5c35aa2a1440] mmco: unref short failure",
+        ""
+      ]
+    },
+    {
+      "filename": "804.mp4",
+      "errors": [
+        "[null @ 0x5e0151a0be40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 58 >= 0",
+        "[null @ 0x5e0151a0be40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 58 >= 1",
+        "[null @ 0x5e0151a0be40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 58 >= 2",
+        "[null @ 0x5e0151a0be40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 58 >= 3",
+        "[null @ 0x5e0151a0be40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 58 >= 4"
+      ]
+    },
+    {
+      "filename": "373.mp4",
+      "errors": [
+        "[null @ 0x557736c9bcc0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 99 >= 0",
+        "[null @ 0x557736c9bcc0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 99 >= 1",
+        "[null @ 0x557736c9bcc0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 99 >= 2",
+        "[null @ 0x557736c9bcc0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 99 >= 3",
+        "[null @ 0x557736c9bcc0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 99 >= 4"
+      ]
+    },
+    {
+      "filename": "70.mp4",
+      "errors": [
+        "[null @ 0x56c51d564540] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 47 >= 0",
+        "[null @ 0x56c51d564540] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 47 >= 1",
+        "[null @ 0x56c51d564540] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 47 >= 2",
+        "[null @ 0x56c51d564540] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 47 >= 3",
+        "[null @ 0x56c51d564540] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 47 >= 4"
+      ]
+    },
+    {
+      "filename": "558.mp4",
+      "errors": [
+        "[null @ 0x5cd506c10b00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 99 >= 0",
+        "[null @ 0x5cd506c10b00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 99 >= 1",
+        "[null @ 0x5cd506c10b00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 99 >= 2",
+        "[null @ 0x5cd506c10b00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 99 >= 3",
+        "[null @ 0x5cd506c10b00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 99 >= 4"
+      ]
+    },
+    {
+      "filename": "197.mp4",
+      "errors": [
+        "[null @ 0x5a3ebc11a300] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 111 >= 0",
+        "[null @ 0x5a3ebc11a300] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 111 >= 1",
+        "[null @ 0x5a3ebc11a300] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 111 >= 2",
+        "[null @ 0x5a3ebc11a300] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 111 >= 3",
+        "[null @ 0x5a3ebc11a300] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 111 >= 4"
+      ]
+    },
+    {
+      "filename": "60.mp4",
+      "errors": [
+        "[h264 @ 0x5cdc9e34fe40] mmco: unref short failure",
+        "    Last message repeated 1 times",
+        ""
+      ]
+    },
+    {
+      "filename": "366.mp4",
+      "errors": [
+        "[null @ 0x5ed1b8a54040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 15 >= 0",
+        "[null @ 0x5ed1b8a54040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 15 >= 1",
+        "[null @ 0x5ed1b8a54040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 15 >= 2",
+        "[null @ 0x5ed1b8a54040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 15 >= 3",
+        "[null @ 0x5ed1b8a54040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 15 >= 4"
+      ]
+    },
+    {
+      "filename": "437.mp4",
+      "errors": [
+        "[null @ 0x5ee290794240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 80 >= 0",
+        "[null @ 0x5ee290794240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 80 >= 1",
+        "[null @ 0x5ee290794240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 80 >= 2",
+        "[null @ 0x5ee290794240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 80 >= 3",
+        "[null @ 0x5ee290794240] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 80 >= 4"
+      ]
+    },
+    {
+      "filename": "707.mp4",
+      "errors": [
+        "[null @ 0x61abb63b8580] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 52 >= 0",
+        "[null @ 0x61abb63b8580] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 52 >= 1",
+        "[null @ 0x61abb63b8580] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 52 >= 2",
+        "[null @ 0x61abb63b8580] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 52 >= 3",
+        "[null @ 0x61abb63b8580] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 52 >= 4"
+      ]
+    },
+    {
+      "filename": "391.mp4",
+      "errors": [
+        "[h264 @ 0x5556b9b86540] mmco: unref short failure",
+        ""
+      ]
+    },
+    {
+      "filename": "923.mp4",
+      "errors": [
+        "[null @ 0x637fdb01b800] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 200 >= 0",
+        "[null @ 0x637fdb01b800] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 200 >= 1",
+        "[null @ 0x637fdb01b800] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 200 >= 2",
+        "[null @ 0x637fdb01b800] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 200 >= 3",
+        "[null @ 0x637fdb01b800] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 200 >= 4"
+      ]
+    },
+    {
+      "filename": "26.mp4",
+      "errors": [
+        "[aac @ 0x5b483e7ed900] Input buffer exhausted before END element found",
+        "[aist#0:1/aac @ 0x5b483e7ee780] Error submitting packet to decoder: Invalid data found when processing input",
+        "[NULL @ 0x5b483e792480] Invalid NAL unit size (6521 > 5143).",
+        "[NULL @ 0x5b483e792480] missing picture in access unit with size 5147",
+        "[h264 @ 0x5b483e893e40] Invalid NAL unit size (6521 > 5143)."
+      ]
+    },
+    {
+      "filename": "793.mp4",
+      "errors": [
+        "[null @ 0x574813655e00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 139 >= 0",
+        "[null @ 0x574813655e00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 139 >= 1",
+        "[null @ 0x574813655e00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 139 >= 2",
+        "[null @ 0x574813655e00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 139 >= 3",
+        "[null @ 0x574813655e00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 139 >= 4"
+      ]
+    },
+    {
+      "filename": "819.mp4",
+      "errors": [
+        "[h264 @ 0x636d80813e40] mmco: unref short failure",
+        "    Last message repeated 1 times",
+        ""
+      ]
+    },
+    {
+      "filename": "351.mp4",
+      "errors": [
+        "[null @ 0x5ef765e379c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 14 >= 0",
+        "[null @ 0x5ef765e379c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 14 >= 1",
+        "[null @ 0x5ef765e379c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 14 >= 2",
+        "[null @ 0x5ef765e379c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 14 >= 3",
+        "[null @ 0x5ef765e379c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 14 >= 4"
+      ]
+    },
+    {
+      "filename": "774.mp4",
+      "errors": [
+        "[null @ 0x5e276be856c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 47 >= 0",
+        "[null @ 0x5e276be856c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 47 >= 1",
+        "[null @ 0x5e276be856c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 47 >= 2",
+        "[null @ 0x5e276be856c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 47 >= 3",
+        "[null @ 0x5e276be856c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 47 >= 4"
+      ]
+    },
+    {
+      "filename": "410.mp4",
+      "errors": [
+        "[null @ 0x5ca8f0580d80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 19 >= 0",
+        "[null @ 0x5ca8f0580d80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 19 >= 1",
+        "[null @ 0x5ca8f0580d80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 19 >= 2",
+        "[null @ 0x5ca8f0580d80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 19 >= 3",
+        "[null @ 0x5ca8f0580d80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 19 >= 4"
+      ]
+    },
+    {
+      "filename": "502.mp4",
+      "errors": [
+        "[null @ 0x562f7037f380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 220 >= 0",
+        "[null @ 0x562f7037f380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 220 >= 1",
+        "[null @ 0x562f7037f380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 220 >= 2",
+        "[null @ 0x562f7037f380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 220 >= 3",
+        "[null @ 0x562f7037f380] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 220 >= 4"
+      ]
+    },
+    {
+      "filename": "28.mp4",
+      "errors": [
+        "[null @ 0x635f3acb7d40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 36 >= 0",
+        "[null @ 0x635f3acb7d40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 36 >= 1",
+        "[null @ 0x635f3acb7d40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 36 >= 2",
+        "[null @ 0x635f3acb7d40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 36 >= 3",
+        "[null @ 0x635f3acb7d40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 36 >= 4"
+      ]
+    },
+    {
+      "filename": "595.mp4",
+      "errors": [
+        "[null @ 0x598c0d752c00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 211 >= 0",
+        "[null @ 0x598c0d752c00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 211 >= 1",
+        "[null @ 0x598c0d752c00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 211 >= 2",
+        "[null @ 0x598c0d752c00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 211 >= 3",
+        "[null @ 0x598c0d752c00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 211 >= 4"
+      ]
+    },
+    {
+      "filename": "21.mp4",
+      "errors": [
+        "[null @ 0x58544de0de40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 209 >= 0",
+        "[null @ 0x58544de0de40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 209 >= 1",
+        "[null @ 0x58544de0de40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 209 >= 2",
+        "[null @ 0x58544de0de40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 209 >= 3",
+        "[null @ 0x58544de0de40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 209 >= 4"
+      ]
+    },
+    {
+      "filename": "552.mp4",
+      "errors": [
+        "[null @ 0x64ffdc39c840] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 125 >= 0",
+        "[null @ 0x64ffdc39c840] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 125 >= 1",
+        "[null @ 0x64ffdc39c840] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 125 >= 2",
+        "[null @ 0x64ffdc39c840] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 125 >= 3",
+        "[null @ 0x64ffdc39c840] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 125 >= 4"
+      ]
+    },
+    {
+      "filename": "144.mp4",
+      "errors": [
+        "[h264 @ 0x5821e0a54940] mmco: unref short failure",
+        "    Last message repeated 1 times",
+        ""
+      ]
+    },
+    {
+      "filename": "727.mp4",
+      "errors": [
+        "[h264 @ 0x56581264e040] mmco: unref short failure",
+        ""
+      ]
+    },
+    {
+      "filename": "971.mp4",
+      "errors": [
+        "[h264 @ 0x622bcc096f40] mmco: unref short failure",
+        "    Last message repeated 1 times",
+        ""
+      ]
+    },
+    {
+      "filename": "39.mp4",
+      "errors": [
+        "[null @ 0x5e2f8ae1df40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 84 >= 0",
+        "[null @ 0x5e2f8ae1df40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 84 >= 1",
+        "[null @ 0x5e2f8ae1df40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 84 >= 2",
+        "[null @ 0x5e2f8ae1df40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 84 >= 3",
+        "[null @ 0x5e2f8ae1df40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 84 >= 4"
+      ]
+    },
+    {
+      "filename": "715.mp4",
+      "errors": [
+        "[h264 @ 0x5a6fbc404880] mmco: unref short failure",
+        ""
+      ]
+    },
+    {
+      "filename": "226.mp4",
+      "errors": [
+        "[null @ 0x60d8a6bb5600] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 249 >= 0",
+        "[null @ 0x60d8a6bb5600] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 249 >= 1",
+        "[null @ 0x60d8a6bb5600] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 249 >= 2",
+        "[null @ 0x60d8a6bb5600] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 249 >= 3",
+        "[null @ 0x60d8a6bb5600] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 249 >= 4"
+      ]
+    },
+    {
+      "filename": "574.mp4",
+      "errors": [
+        "[null @ 0x60d15866f800] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 137 >= 0",
+        "[null @ 0x60d15866f800] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 137 >= 1",
+        "[null @ 0x60d15866f800] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 137 >= 2",
+        "[null @ 0x60d15866f800] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 137 >= 3",
+        "[null @ 0x60d15866f800] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 137 >= 4"
+      ]
+    },
+    {
+      "filename": "79.mp4",
+      "errors": [
+        "[null @ 0x59e80757fe40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 52 >= 0",
+        "[null @ 0x59e80757fe40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 52 >= 1",
+        "[null @ 0x59e80757fe40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 52 >= 2",
+        "[null @ 0x59e80757fe40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 52 >= 3",
+        "[null @ 0x59e80757fe40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 52 >= 4"
+      ]
+    },
+    {
+      "filename": "913.mp4",
+      "errors": [
+        "[null @ 0x5b11cbe1c0c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 159 >= 0",
+        "[null @ 0x5b11cbe1c0c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 159 >= 1",
+        "[null @ 0x5b11cbe1c0c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 159 >= 2",
+        "[null @ 0x5b11cbe1c0c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 159 >= 3",
+        "[null @ 0x5b11cbe1c0c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 159 >= 4"
+      ]
+    },
+    {
+      "filename": "67.mp4",
+      "errors": [
+        "[null @ 0x5faf4ca62880] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 74 >= 0",
+        "[null @ 0x5faf4ca62880] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 74 >= 1",
+        "[null @ 0x5faf4ca62880] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 74 >= 2",
+        "[null @ 0x5faf4ca62880] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 74 >= 3",
+        "[null @ 0x5faf4ca62880] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 74 >= 4"
+      ]
+    },
+    {
+      "filename": "174.mp4",
+      "errors": [
+        "[null @ 0x62fd4619a040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 17 >= 0",
+        "[null @ 0x62fd4619a040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 17 >= 1",
+        "[null @ 0x62fd4619a040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 17 >= 2",
+        "[null @ 0x62fd4619a040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 17 >= 3",
+        "[null @ 0x62fd4619a040] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 17 >= 4"
+      ]
+    },
+    {
+      "filename": "50.mp4",
+      "errors": [
+        "[null @ 0x56ce616dccc0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 19 >= 0",
+        "[null @ 0x56ce616dccc0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 19 >= 1",
+        "[null @ 0x56ce616dccc0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 19 >= 2",
+        "[null @ 0x56ce616dccc0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 19 >= 3",
+        "[null @ 0x56ce616dccc0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 19 >= 4"
+      ]
+    },
+    {
+      "filename": "237.mp4",
+      "errors": [
+        "[null @ 0x61ab8d60fc40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 178 >= 0",
+        "[null @ 0x61ab8d60fc40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 178 >= 1",
+        "[null @ 0x61ab8d60fc40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 178 >= 2",
+        "[null @ 0x61ab8d60fc40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 178 >= 3",
+        "[null @ 0x61ab8d60fc40] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 178 >= 4"
+      ]
+    },
+    {
+      "filename": "462.mp4",
+      "errors": [
+        "[null @ 0x5efcba1756c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 91 >= 0",
+        "[null @ 0x5efcba1756c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 91 >= 1",
+        "[null @ 0x5efcba1756c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 91 >= 2",
+        "[null @ 0x5efcba1756c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 91 >= 3",
+        "[null @ 0x5efcba1756c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 91 >= 4"
+      ]
+    },
+    {
+      "filename": "52.mp4",
+      "errors": [
+        "[null @ 0x560c3a141d00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 253 >= 0",
+        "[null @ 0x560c3a141d00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 253 >= 1",
+        "[null @ 0x560c3a141d00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 253 >= 2",
+        "[null @ 0x560c3a141d00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 253 >= 3",
+        "[null @ 0x560c3a141d00] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 253 >= 4"
+      ]
+    },
+    {
+      "filename": "231.mp4",
+      "errors": [
+        "[h264 @ 0x59d93fa5b440] mmco: unref short failure",
+        "    Last message repeated 1 times",
+        ""
+      ]
+    },
+    {
+      "filename": "245.mp4",
+      "errors": [
+        "[h264 @ 0x619c2d520340] mmco: unref short failure",
+        "    Last message repeated 1 times",
+        ""
+      ]
+    },
+    {
+      "filename": "664.mp4",
+      "errors": [
+        "[null @ 0x5754b6c3d7c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 80 >= 0",
+        "[null @ 0x5754b6c3d7c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 80 >= 1",
+        "[null @ 0x5754b6c3d7c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 80 >= 2",
+        "[null @ 0x5754b6c3d7c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 80 >= 3",
+        "[null @ 0x5754b6c3d7c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 80 >= 4"
+      ]
+    },
+    {
+      "filename": "301.mp4",
+      "errors": [
+        "[null @ 0x564151438a80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 246 >= 0",
+        "[null @ 0x564151438a80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 246 >= 1",
+        "[null @ 0x564151438a80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 246 >= 2",
+        "[null @ 0x564151438a80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 246 >= 3",
+        "[null @ 0x564151438a80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 246 >= 4"
+      ]
+    },
+    {
+      "filename": "381.mp4",
+      "errors": [
+        "[null @ 0x5684eefca980] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 44 >= 0",
+        "[null @ 0x5684eefca980] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 44 >= 1",
+        "[null @ 0x5684eefca980] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 44 >= 2",
+        "[null @ 0x5684eefca980] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 44 >= 3",
+        "[null @ 0x5684eefca980] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 44 >= 4"
+      ]
+    },
+    {
+      "filename": "189.mp4",
+      "errors": [
+        "[h264 @ 0x56579d13cdc0] mmco: unref short failure",
+        "    Last message repeated 1 times",
+        ""
+      ]
+    },
+    {
+      "filename": "164.mp4",
+      "errors": [
+        "[h264 @ 0x62fe293e52c0] mmco: unref short failure",
+        "    Last message repeated 1 times",
+        ""
+      ]
+    },
+    {
+      "filename": "141.mp4",
+      "errors": [
+        "[null @ 0x58e56a81c6c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 74 >= 0",
+        "[null @ 0x58e56a81c6c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 74 >= 1",
+        "[null @ 0x58e56a81c6c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 74 >= 2",
+        "[null @ 0x58e56a81c6c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 74 >= 3",
+        "[null @ 0x58e56a81c6c0] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 74 >= 4"
+      ]
+    }
+  ]
+}

@@ -147,7 +147,7 @@ def main():
         save_idx = 0
         with open(csv_path, newline='') as f:
             for row in csv.DictReader(f): #遍历的是数据行，不访问head
-                save_idx += 1
+                save_idx = int(row['id']) + 1
 
     else :
         with open(csv_path, 'w', newline='') as f:
