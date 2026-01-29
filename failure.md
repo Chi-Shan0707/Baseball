@@ -1,1 +1,0 @@
-python train.py --data-dir ./dataset --skip-bad-videos --frames 8 --batch-size 1 --num-workers 0 --freeze-backbone

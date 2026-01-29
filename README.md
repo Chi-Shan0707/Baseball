@@ -1,116 +1,66 @@
-## Baseball: simple video classifier
+# Baseball Pitch Classification
 
-Small, beginner-friendly PyTorch training code for classifying 7-second baseball clips as **strike** vs **ball**.
+A modular PyTorch project for classifying baseball pitch videos (Strike vs Ball) using a ResNet-18 feature extractor with interchangeable temporal heads (Average Pooling or LSTM).
 
-It implements:
-- Per-frame **ResNet-18** feature extraction (2D CNN applied to each frame)
-- Two interchangeable temporal heads:
-	- **Temporal Average Pooling** (`--arch pool`)
-	- **LSTM** (`--arch lstm`)
+## Project Structure
 
-### Data layout
+- `dataset.py`: handles video loading (supports OpenCV and Torchvision), preprocessing, and robustly skips damaged videos.
+- `models.py`: contains `ResNetBackbone`, `TemporalPoolHead`, `LSTMHead`, and `FullModel`.
+- `train.py`: CLI training script with metrics and checkpoints.
+- `utils.py`: helper functions.
 
-This repo expects your dataset to look like:
+## Requirements
 
-```
-dataset/
-	videos/
-		0.mp4
-		1.mp4
-		...
-	pitchcalls/
-		labels.csv
-```
+- Python 3.8+
+- PyTorch
+- Torchvision
+- Pandas
+- OpenCV (`pip install opencv-python`) - Recommended for robust video loading without FFmpeg setup issues.
 
-Your `labels.csv` should contain at least columns: `id,label` where label is `strike` or `ball`.<br>
-`Strike` maps to 1. `Ball` maps to 0.
+## Data Setup
 
-### Install
+The project expects the following structure:
+- Labels CSV: `./dataset/pitchcalls/labels.csv` (Columns: `id`, `clip_id`, `label`)
+- Videos: `./dataset/videos/` (Files named `{id}.mp4`)
 
-Minimal dependencies:
-- `torch`
-- `torchvision`
+## usage
 
-Optional (only needed if `torchvision.io.read_video` cannot decode videos on your system):
-- `opencv-python`
+### 1. Training with Temporal Average Pooling (Baseline)
 
-### Train
-
-**Recommended (skip corrupted videos using health report):**
+The default backend is `opencv`. This effectively implements the "Plan without FFmpeg" (direct FFmpeg command usage) by using OpenCV's internal decoder.
 
 ```bash
-python train.py --bad-videos-json video_health_report.json --epochs 10 --batch-size 2
+python train.py --arch pool --data-dir ./dataset/videos --epochs 10
 ```
 
-Baseline (temporal average pooling):
-
-```
-python train.py --arch pool --data-dir ./dataset --epochs 10
-```
-
-LSTM head:
-
-```
-python train.py --arch lstm --data-dir ./dataset --epochs 10
-```
-
-Common flags:
-- `--frames 16` (number of frames sampled uniformly per 7s clip, default 16)
-- `--batch-size 2` (default 4, reduce if OOM)
-- `--lr 1e-4`
-- `--freeze-backbone` (faster + less memory)
-- `--device cpu` or `--device cuda`
-- `--backend auto|torchcodec|torchvision|cv2` (video decoder, default auto)
-- `--num-workers 0` (DataLoader workers, 0 is safest)
-- `--skip-bad-videos` (replace corrupt videos with synthetic placeholders at runtime)
-- `--bad-videos-json path/to/video_health_report.json` (pre-filter bad videos before loading - **most efficient**)
-
-Checkpoints and metrics are saved under `checkpoints/`.
-
-### Handling corrupted videos
-
-If you have a `video_health_report.json` (from running video health checks), you can exclude bad videos **before decoding**:
+### 2. Training with LSTM Head
 
 ```bash
-python train.py --bad-videos-json video_health_report.json --epochs 10
+python train.py --arch lstm --data-dir ./dataset/videos --epochs 10
 ```
 
-This is more efficient than `--skip-bad-videos` (which tries to decode then falls back). With 77 corrupted videos identified, this will train on the 906 healthy videos only.
+### 3. Using Torchvision (FFmpeg) Backend
 
-Expected JSON format:
-```json
-{
-  "damaged_videos": [
-    {"filename": "884.mp4", ...},
-    {"filename": "470.mp4", ...}
-  ]
-}
+If you have FFmpeg installed and configured with Torchvision, you can use:
+
+```bash
+python train.py --arch lstm --backend torchvision --data-dir ./dataset/videos
 ```
 
-### Smoke test (no videos needed)
+### 4. Smoke Test (CPU)
 
-If videos are missing or decoding fails, `train.py` automatically falls back to a tiny synthetic dataset so you can verify the pipeline works:
+If you don't have the dataset around, simply point to a non-existent directory. The script will generate a synthetic dataset to verify the pipeline.
 
-```
-python train.py --arch pool --epochs 2 --device cpu
-```
-
-### Troubleshooting
-
-- GPU OOM: reduce `--frames` and/or `--batch-size`, or add `--freeze-backbone`.
-- Slow training: freezing the backbone helps a lot.
-- Video decode errors: install `opencv-python` so the dataset loader can fall back to OpenCV.
-- Want gradient accumulation? Start by lowering batch size; if you want, I can add accumulation to `train.py`.
-
-### Dataset source
-
-```
-@inproceedings{mlbyoutube2018,
-	title={Fine-grained Activity Recognition in Baseball Videos},
-	booktitle={CVPR Workshop on Computer Vision in Sports},
-	author={AJ Piergiovanni and Michael S. Ryoo},
-	year={2018}
-}
+```bash
+python train.py --data-dir ./dummy_path --epochs 2 --device cpu --batch-size 4
 ```
 
-Repo: https://github.com/piergiaj/mlb-youtube/
+## Troubleshooting
+
+- **GPU OOM (Out Of Memory)**:
+  - Reduce batch size: `--batch-size 4`
+  - Reduce frames per clip: `--frames 8`
+  - Freeze backbone: `--freeze-backbone`
+- **Video Loading Errors**:
+  - The dataset automatically skips damaged videos.
+  - If you see many errors, try switching backends: `--backend opencv` vs `--backend torchvision`.

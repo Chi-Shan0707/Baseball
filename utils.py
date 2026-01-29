@@ -1,131 +1,82 @@
-"""Small utilities for training: reproducibility, metrics, checkpointing."""
-
-from __future__ import annotations
-
-import json
 import os
 import random
-from dataclasses import asdict, is_dataclass
-from pathlib import Path
-from typing import Any, Dict, Optional
-
+import numpy as np
 import torch
-from torch import Tensor
+import shutil
 
-
-def set_seed(seed: int = 42) -> None:
-    """Set random seeds for reproducibility."""
-
+def set_seed(seed=42):
+    """
+    Set the random seed for reproducibility.
+    """
     random.seed(seed)
-    os.environ["PYTHONHASHSEED"] = str(seed)
-
-    try:
-        import numpy as np
-
-        np.random.seed(seed)
-    except Exception:
-        # numpy is optional; training does not require it.
-        pass
-
+    np.random.seed(seed)
     torch.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-
-    # Good defaults for deterministic-ish behavior.
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+    # Ensure deterministic behavior (may slow down training)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-
-def binary_classification_metrics(logits: Tensor, targets: Tensor) -> Dict[str, float]:
-    """Compute accuracy/precision/recall/F1 for binary classification.
-
-    Args:
-        logits: (N, 2) model outputs
-        targets: (N,) integer labels in {0,1}
-
-    Returns:
-        dict with keys: accuracy, precision, recall, f1
+def save_checkpoint(state, is_best, checkpoint_dir='checkpoints'):
     """
+    Save a checkpoint of the model and optimizer state.
+    """
+    os.makedirs(checkpoint_dir, exist_ok=True)
+    filename = os.path.join(checkpoint_dir, 'checkpoint.pth')
+    torch.save(state, filename)
+    if is_best:
+        shutil.copyfile(filename, os.path.join(checkpoint_dir, 'model_best.pth'))
 
-    if logits.ndim != 2 or logits.size(1) != 2:
-        raise ValueError("Expected logits shape (N, 2)")
-    if targets.ndim != 1:
-        targets = targets.view(-1)
-
-    preds = logits.argmax(dim=1)
-
-    tp = ((preds == 1) & (targets == 1)).sum().item()
-    tn = ((preds == 0) & (targets == 0)).sum().item()
-    fp = ((preds == 1) & (targets == 0)).sum().item()
-    fn = ((preds == 0) & (targets == 1)).sum().item()
-
-    total = tp + tn + fp + fn
-    accuracy = (tp + tn) / total if total > 0 else 0.0
+def calculate_metrics(y_true, y_pred):
+    """
+    Calculate accuracy, precision, recall, and F1 score.
+    Args:
+        y_true: list or array of true labels
+        y_pred: list or array of predicted labels
+    Returns:
+        dict containing metrics
+    """
+    # Use sklearn if available, else manual
+    # For a small project, manual is fine but sklearn is standard.
+    # I'll implement manual to avoid extra dependency if not requested, 
+    # but sklearn is usually assumed. 
+    # Let's do a simple manual calculation for binary classification for zero dependency
+    # or just use sklearn if user installs it. 
+    # Given requirements: "minimal dependency list (torch, torchvision, opencv-python optional)"
+    # So I will implement manually to avoid sklearn dependency.
+    
+    tp = 0
+    fp = 0
+    fn = 0
+    tn = 0
+    
+    # Assuming binary 0/1, but let's handle multi-class generally or just strictly binary as per prompt default.
+    # Prompt says: "Default to binary classification (2 classes)"
+    
+    # Convert to numpy arrays for easier handling
+    y_true = np.array(y_true)
+    y_pred = np.array(y_pred)
+    
+    correct = (y_true == y_pred).sum()
+    total = len(y_true)
+    accuracy = correct / total if total > 0 else 0.0
+    
+    # For binary metrics, usually class 1 is positive.
+    # Let's assume class 1 is positive.
+    
+    tp = ((y_pred == 1) & (y_true == 1)).sum()
+    fp = ((y_pred == 1) & (y_true == 0)).sum()
+    fn = ((y_pred == 0) & (y_true == 1)).sum()
+    tn = ((y_pred == 0) & (y_true == 0)).sum()
+    
     precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
     recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
-    f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) > 0 else 0.0
-
+    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
+    
     return {
-        "accuracy": float(accuracy),
-        "precision": float(precision),
-        "recall": float(recall),
-        "f1": float(f1),
+        "accuracy": accuracy,
+        "precision": precision,
+        "recall": recall,
+        "f1": f1
     }
-
-
-def save_checkpoint(
-    path: Path,
-    model: torch.nn.Module,
-    optimizer: Optional[torch.optim.Optimizer],
-    epoch: int,
-    metrics: Dict[str, float],
-    args: Optional[Any] = None,
-) -> None:
-    """Save a training checkpoint."""
-
-    path.parent.mkdir(parents=True, exist_ok=True)
-
-    payload: Dict[str, Any] = {
-        "model_state": model.state_dict(),
-        "epoch": int(epoch),
-        "metrics": dict(metrics),
-    }
-
-    if optimizer is not None:
-        payload["optimizer_state"] = optimizer.state_dict()
-
-    if args is not None:
-        if is_dataclass(args):
-            payload["args"] = asdict(args)
-        else:
-            try:
-                payload["args"] = vars(args)
-            except Exception:
-                payload["args"] = str(args)
-
-    torch.save(payload, str(path))
-
-
-def load_checkpoint(
-    path: Path,
-    model: torch.nn.Module,
-    optimizer: Optional[torch.optim.Optimizer] = None,
-    map_location: str | torch.device = "cpu",
-) -> Dict[str, Any]:
-    """Load a checkpoint into a model (and optionally optimizer)."""
-
-    ckpt = torch.load(str(path), map_location=map_location)
-    model.load_state_dict(ckpt["model_state"])
-
-    if optimizer is not None and "optimizer_state" in ckpt:
-        optimizer.load_state_dict(ckpt["optimizer_state"])
-
-    return ckpt
-
-
-def save_json(path: Path, data: Dict[str, Any]) -> None:
-    """Save a JSON file with pretty formatting."""
-
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w") as f:
-        json.dump(data, f, indent=2, sort_keys=True)
-        f.write("\n")
