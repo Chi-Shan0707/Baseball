@@ -64,3 +64,20 @@ python train.py --data-dir ./dummy_path --epochs 2 --device cpu --batch-size 4
 - **Video Loading Errors**:
   - The dataset automatically skips damaged videos.
   - If you see many errors, try switching backends: `--backend opencv` vs `--backend torchvision`.
+
+- ```bash
+  [h264 @ 0x386feac0] mmco: unref short failure
+  ```
+  - Cause: Some of the .mp4 video files in the dataset have minor encoding glitches or missing reference frames in their H.264 stream. This is common in web-scraped datasets (like MLB-YouTube).
+  - Impact: It is non-fatal. The underlying video decoder (FFmpeg/OpenCV) is simply logging that the stream isn't perfect, but it is successfully recovering and continuing to decode the rest of the video. You can ignore these.
+
+- ```bash
+  [av1 @ 0x39955f80] Your platform doesn't support hardware accelerated AV1 decoding.
+  [av1 @ 0x39955f80] Failed to get pixel format.
+  [av1 @ 0x39955f80] Get current frame error
+  ```
+  - Cause: Some videos in the dataset use the newer AV1 codec. Your system's FFmpeg/OpenCV installation seems to lack a proper software decoder or hardware support for AV1, causing it to fail completely for these specific files.
+  - Impact: These specific videos are failing to load.
+  - Status: Handled.<br>
+    Your training loop is not crashing. Note the progress bar is moving (2% -> 5% -> 9%).
+    This is because dataset.py catches these failures (returns None) and collate_fn filters them out. You are effectively training on the subset of videos that can be decoded (H.264), and skipping the AV1 ones.

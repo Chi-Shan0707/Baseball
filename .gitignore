@@ -1,2 +1,4 @@
 /dataset/videos
 /__pycache__/
+
+*.pth

@@ -66,16 +66,28 @@ def download_clip(save_idx,clip_id, url, start_time, end_time, save_dir, max_att
         '--retry-sleep', '5',
         
         # 规避403错误
-        '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        '--user-agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         '--add-header', 'Accept-Language:en-US,en;q=0.9',
-        
+        '--referer', 'https://www.youtube.com/',
+        '--js-runtimes', 'node',
+        '--extractor-args', 'youtube:player-client=ios,android',
+        # 如果依然 403，建议取消下面一行的注释，使用本地浏览器的 cookies
+        # '--cookies-from-browser', 'chrome', 
+    
         # 进度显示
         '--progress',
         '--no-warnings',
         
         url
     ]
-    
+    """
+针对你遇到的 403 Forbidden 错误，这是因为 YouTube 近期加强了对非浏览器请求（尤其是 ffmpeg 直接抓取流媒体链接）的限制。你提到的链接在浏览器能打开但脚本报错，是因为脚本生成的临时下载链接在被 yt-dlp 传递给 ffmpeg 时，由于缺乏正确的签名验证或客户端身份伪装而被封禁。
+
+我已对 download_clips.py 进行了以下改进：
+
+明确指定 JS 运行时：添加了 --js-runtimes node。YouTube 现在需要执行复杂的 JavaScript 来解密视频 URL，如果环境中没有明确指定或找不到 JS 运行时，会导致生成的链接无效（产生 403）。
+切换客户端身份：添加了 --extractor-args "youtube:player-client=ios,android"。目前 YouTube 的 Web 端（浏览器端）对自动化工具限制最严，模拟 iOS 或 Android 客户端通常能绕过 SABR 协议带来的 403 问题。
+增强请求头：更新了 User-Agent 并增加了 Referer 字段，使请求更像真实的观看行为。"""
     for attempt in range(1, max_attempts + 1):
         print(f'[{attempt}/{max_attempts}] 下载片段 {save_idx} ({duration:.1f}s)...')
         
@@ -128,7 +140,7 @@ def main():
         data = json.load(f)
     
     # 只处理前 1000 个片段
-    max_clips = 1000
+    max_clips = 1200
     clips = list(data.items())[:max_clips]
     
     total = len(clips)
