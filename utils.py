@@ -21,12 +21,24 @@ def set_seed(seed=42):
 def save_checkpoint(state, is_best, checkpoint_dir='checkpoints'):
     """
     Save a checkpoint of the model and optimizer state.
+
+    Behavior:
+    - Always write full checkpoint dict to `checkpoint.pth` (can be used to resume training).[So we don't write  *state['state_dict']*   ）
+    - When `is_best` is True, write **only** the model `state_dict` to `model_best.pth` to ensure
+      it can be loaded safely with `torch.load(..., weights_only=True)` and avoid
+      deserialization issues caused by non-weight objects (optimizer, numpy scalars, etc.).
     """
     os.makedirs(checkpoint_dir, exist_ok=True)
     filename = os.path.join(checkpoint_dir, 'checkpoint.pth')
+    # Save full checkpoint (resume friendly)
     torch.save(state, filename)
     if is_best:
-        shutil.copyfile(filename, os.path.join(checkpoint_dir, 'model_best.pth'))
+        # Save only the model weights for safer inference loading
+        torch.save(state['state_dict'], os.path.join(checkpoint_dir, 'model_best.pth'))
+    """
+    state_dict 是模型的权重与缓冲张量字典，结构上是一个 mapping（名字 → tensor），例如 {'layer1.weight': tensor(...), ...}。
+    保存/加载 state_dict（而非完整 checkpoint）通常更安全、更轻量，也更容易用 torch.load(..., weights_only=True) 加载用于推理
+    """
 
 def calculate_metrics(y_true, y_pred):
     """

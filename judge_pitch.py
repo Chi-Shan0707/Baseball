@@ -9,8 +9,8 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 import pandas as pd
 
-# Define a minimal Dataset for inference that reuses logic where possible
-# or just re-implements the loading logic to avoid dependency on labels.csv
+#Define a minimal Dataset for inference that reuses logic where possible
+#or just re-implements the loading logic to avoid dependency on labels.csv
 class InferenceDataset(VideoDataset):
     """
     Inherits from VideoDataset but adapts for inference (no labels file needed).
@@ -104,10 +104,10 @@ def main():
     # Note: We need to know if the model was an LSTM or Pool model. 
     # Usually checkpoints save the architecture name, but our save_checkpoint in utils.py 
     # only saved state_dict. So user must specify --arch matching the training.
-    model = FullModel(arch=args.arch, num_classes=2, freeze_backbone=False) # Freeze doesn't matter for inference
+    model = FullModel(arch=args.arch, num_classes=2, freeze_backbone=False ) # Freeze doesn't matter for inference
     
     try:
-        checkpoint = torch.load(args.model_path, map_location=device)
+        checkpoint = torch.load(args.model_path, map_location=device,weights_only=  True)
         # Check if 'state_dict' key exists (standard) or if it's the state_dict itself
         if 'state_dict' in checkpoint:
             model.load_state_dict(checkpoint['state_dict'])
@@ -126,7 +126,22 @@ def main():
     
     # Setup Dataset
     dataset = InferenceDataset(args.input_dir, frames_per_clip=args.frames, backend=args.backend)
-    loader = DataLoader(dataset, batch_size=1, shuffle=False)
+
+    # Custom collate to handle videos that failed to decode (where __getitem__ returns (name, None)).
+    # Default collate will raise on NoneTypes (TypeError), so we explicitly handle that case:
+    # 即处理破烂视频的情况
+    def _inference_collate(batch):
+        # batch is a list of tuples (video_name, frames_or_None)
+        video_names = [item[0] for item in batch]
+        frames_list = [item[1] for item in batch]
+        # If any sample failed to load/decode, return names and None so the loop can skip gracefully
+        if any(f is None for f in frames_list):
+            return video_names, None
+        import torch
+        frames = torch.stack(frames_list, dim=0)
+        return video_names, frames
+
+    loader = DataLoader(dataset, batch_size=1, shuffle=False, collate_fn=_inference_collate)
     
     results = []
     
