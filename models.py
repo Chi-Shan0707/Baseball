@@ -41,6 +41,10 @@ class ResNetBackbone(nn.Module):
         Returns:
             torch.Tensor: Output embeddings of shape (Batch, T, D)
         """
+        """
+        forward 定义了模块在一次前向推理时的数据流（输入→输出），
+        PyTorch 在你调用 model(input) 时会运行它，并且自动构建反向传播图用于训练。
+        """
         b, t, c, h, w = x.shape
         
         # Reshape to (Batch * T, C, H, W) for the 2D CNN
